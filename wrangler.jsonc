@@ -2,7 +2,8 @@
   "name": "vide-sg-la-1",
   "main": "index.js",
   "compatibility_date": "2026-01-08",
-  "assets": {
+  "assets": { "directory": "./direct" }
     "directory": "./direct"
   }
 }
+
