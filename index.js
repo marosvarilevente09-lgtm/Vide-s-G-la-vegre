@@ -1,9 +1,14 @@
-// index.js
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-    // Ha root, akkor a főoldalt küldjük
-    const path = url.pathname === "/" ? "/Szavazas 2026.html" : url.pathname;
-    return fetch(path, request);
+addEventListener("fetch", event => {
+  event.respondWith(handleRequest(event));
+});
+
+async function handleRequest(event) {
+  const url = new URL(event.request.url);
+  let path = url.pathname === "/" ? "/Szavazas 2026.html" : url.pathname; // kezdőlap beállítása
+
+  try {
+    return await fetch(new Request(`.${path}`, event.request));
+  } catch (err) {
+    return new Response("File not found", { status: 404 });
   }
-};
+}
