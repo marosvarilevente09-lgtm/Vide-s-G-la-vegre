@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Times New Roman", serif;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+}
+
+/* Színváltós cím */
+.title {
+    font-size: 52px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove {
+    from { background-position: 0%; }
+    to { background-position: 300%; }
+}
+
+.divider {
+    width: 60%;
+    height: 2px;
+    margin: 25px auto 50px;
+    background: linear-gradient(to right, transparent, white, transparent);
+}
+
+.form-group {
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+input {
+    width: 300px;
+    height: 35px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    outline: none;
+}
+
+.next-button-container {
+  text-align: center;      /* középre */
+  margin: 40px 0;          /* egy kis tér az utolsó doboz alatt */
+}
+
+.vote-button {
+  display: inline-block;
+  padding: 16px 50px;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff);
+  background-size: 200%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vote-button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

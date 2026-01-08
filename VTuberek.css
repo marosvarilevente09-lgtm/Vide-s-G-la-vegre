@@ -1,0 +1,181 @@
+body {
+  background-color: #000; /* fekete háttér */
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* cím középre */
+}
+
+/* --- Fő cím --- */
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 3em;
+  animation: colorChange 3s infinite;
+}
+
+/* Színváltós cím */
+.title {
+    font-size: 52px;
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #d4af37,
+        #b97cff,
+        #4aa3ff,
+        #d4af37
+    );
+
+    background-size: 300%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientMove 6s linear infinite;
+}
+
+/* Gradiens animáció */
+@keyframes gradientMove {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 300%;
+    }
+}
+
+/* Elválasztó vonal */
+.divider {
+    width: 60%;
+    height: 2px;
+    margin: 25px auto 50px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        white,
+        transparent
+    );
+}
+
+
+/* --- Kép stílus --- */
+img {
+  width: 300px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* --- Nagy kategória doboz --- */
+.category {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #111;
+  border: 1px solid #555;
+}
+
+/* --- Kis kategóriák rácsban --- */
+.subcategories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 600px); /* dupla szélesség */
+  justify-content: center; /* középre rendezi a rácsot */
+  gap: 30px; /* több hely a dobozok között */
+  padding: 10px 0;
+}
+
+.subcategory {
+  background-color: #222;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #555;
+  display: flex;
+  flex-direction: column;
+  width: 600px; /* fix szélesség */
+}
+
+.subcategory strong {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 1.5em; /* nagyobb cím */
+}
+
+.subcategory label {
+  display: flex;               /* flexbox a középre igazításhoz */
+  justify-content: center;     /* vízszintesen középre */
+  align-items: center;         /* függőlegesen középre a dobozban */
+  padding: 15px 20px;          /* kattintható terület */
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 1.3em;
+  background-color: #333;      /* vizuális gombként */
+  border-radius: 8px;
+  transition: background 0.2s;
+  user-select: none;           /* ne lehessen kijelölni a szöveget véletlenül */
+}
+
+label.selected {
+  color: white; /* szöveg mindig látszódjon */
+  background: linear-gradient(270deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
+  background-size: 600% 100%; /* elég nagy a mozgáshoz */
+  animation: gradientMove 5s linear infinite;
+  transition: color 0.3s;
+}
+
+/* Gradiens mozgás animáció */
+@keyframes gradientMove {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 0%; }
+  100% { background-position: 0% 0%; }
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  cursor: pointer;
+  font-size: 1.2em;  /* szöveg nagyobb */
+  user-select: none;  /* ne lehessen kijelölni véletlenül */
+}
+
+label:hover {
+  background-color: #333;
+}
+
+/* eltávolítjuk a rádiógombot */
+.subcategory input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] {
+  margin-right: 12px;
+  width: 20px;    /* nagyobb pötty */
+  height: 20px;   /* nagyobb pötty */
+}
+
+.next-button-container {
+  text-align: center;      /* középre */
+  margin: 40px 0;          /* egy kis tér az utolsó doboz alatt */
+}
+
+.vote-button {
+  display: inline-block;
+  padding: 16px 50px;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff);
+  background-size: 200%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vote-button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

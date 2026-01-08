@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-os Videós és VTuber Gála</title>
+    <link rel="stylesheet" href="Videósok.css">
+</head>
+<body>
+    <h1 class="title">Videós Díjátadó 2026</h1>
+
+  <!-- VTUBER KATEGÓRIÁK -->
+  <div class="subcategories-grid">
+
+    <div class="subcategory">
+      <strong>Legvicessebb tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-1">A</label>
+      <label><input type="radio" name="vtuber-1">B</label>
+    </div>
+
+    <div class="subcategory">
+      <strong>Legkomolyabb tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-2">A</label>
+      <label><input type="radio" name="vtuber-2">B</label>
+    </div>
+
+    <div class="subcategory">
+      <strong>Legkreatívabb tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-3">A</label>
+      <label><input type="radio" name="vtuber-3">B</label>
+    </div>
+
+    <div class="subcategory">
+      <strong>Legoktatóbb tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-4">A</label>
+      <label><input type="radio" name="vtuber-4">B</label>
+    </div>
+
+    <div class="subcategory">
+      <strong>Legjobb közösségi interakció tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-5">A</label>
+      <label><input type="radio" name="vtuber-5">B</label>
+    </div>
+
+    <div class="subcategory">
+      <strong>Legjobban fejlödő tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-6">A</label>
+      <label><input type="radio" name="vtuber-6">B</label>
+    </div>
+
+    <div class="subcategory">
+      <strong>Legjobb Minecraftos tartalomgyártó</strong>
+      <label><input type="radio" name="vtuber-7">A</label>
+      <label><input type="radio" name="vtuber-7">B</label>
+    </div>
+
+  </div>
+
+<div class="next-button-container">
+  <a href="Minecraft.html" id="nextLink" class="vote-button disabled">
+  Következő
+  </a>
+</div>
+
+<script>
+const nextLink = document.getElementById("nextLink");
+const categories = document.querySelectorAll(".subcategory");
+
+categories.forEach(category => {
+  const labels = category.querySelectorAll("label");
+  
+  labels.forEach(label => {
+    label.addEventListener("click", () => {
+      // először töröljük a "selected" osztályt az összes labelről ebben a kategóriában
+      labels.forEach(l => l.classList.remove("selected"));
+      
+      // hozzáadjuk a "selected" osztályt a kattintotthoz
+      label.classList.add("selected");
+      
+      // ellenőrizzük, hogy mindegyik kategóriában van-e választás a Tovább gombhoz
+      checkAllSelected();
+    });
+  });
+});
+
+function checkAllSelected() {
+  let allSelected = true;
+  
+  categories.forEach(category => {
+    const selected = category.querySelector("label.selected");
+    if (!selected) allSelected = false;
+  });
+  
+  if (allSelected) {
+    nextLink.classList.remove("disabled");
+  } else {
+    nextLink.classList.add("disabled");
+  }
+}
+</script>
+
+</body>
+</html>

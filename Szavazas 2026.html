@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-os Videós és VTuber Gála</title>
+    <link rel="stylesheet" href="szavazas-2026.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="title">2026-os Videós és VTuber Gála</h1>
+
+        <div class="divider"></div>
+
+        <div class="form-group">
+            <label for="name">Neved:</label><br>
+            <input type="text" id="name" placeholder="Írd be a neved">
+        </div>
+
+        <div class="form-group">
+            <label for="source">Honnét hallottál rólunk?</label><br>
+            <input type="text" id="source" placeholder="Pl.: YouTube, barát, Discord">
+        </div>
+
+        <div class="next-button-container">
+            <a href="Videósok.html" id="startLink" class="vote-button disabled">
+                Tovább a szavazásokhoz
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+    const nameInput = document.getElementById("name");
+    const sourceInput = document.getElementById("source");
+    const startLink = document.getElementById("startLink");
+
+    function checkStartForm() {
+      const nameFilled = nameInput.value.trim() !== "";
+      const sourceFilled = sourceInput.value.trim() !== "";
+
+      if (nameFilled && sourceFilled) {
+        startLink.classList.remove("disabled");
+      } else {
+        startLink.classList.add("disabled");
+      }
+    }
+
+    nameInput.addEventListener("input", checkStartForm);
+    sourceInput.addEventListener("input", checkStartForm);
+
+    startLink.addEventListener("click", function(e) {
+      if (!nameInput.value.trim() || !sourceInput.value.trim()) {
+        e.preventDefault();
+        alert("Kérlek, töltsd ki mindkét mezőt, mielőtt továbbmennél!");
+      }
+    });
+    </script>
+
+</body>
+</html>
