@@ -1,13 +1,20 @@
-addEventListener("fetch", event => {
-  event.respondWith(handleRequest(event.request))
-})
+import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request));
+});
 
 async function handleRequest(request) {
   try {
-    // A Cloudflare Worker automatikusan kezeli az assets könyvtárat
-    return await getAssetFromKV(event) // Ezt az API-t Cloudflare kezeli
+    const url = new URL(request.url);
+    // Ha a főoldalra mennek, a fő HTML-t szolgáljuk ki
+    if (url.pathname === '/') {
+      return await fetch('https://vide-sg-la-1.marosvarilevente09.workers.dev/direct/Videósok.html');
+    }
+
+    // Ha más fájlra mennek, pl CSS vagy HTML
+    return await fetch(`https://vide-sg-la-1.marosvarilevente09.workers.dev${url.pathname}`);
   } catch (err) {
-    // Ha a fájl nem található, visszaadjuk a fő oldalt (index.html)
-    return new Response("Fájl nem található", { status: 404 })
+    return new Response('Hiba történt a webhely betöltésekor', { status: 500 });
   }
 }
