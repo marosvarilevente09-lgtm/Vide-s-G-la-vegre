@@ -1,27 +1,24 @@
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
-
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request));
-});
+addEventListener("fetch", event => {
+  event.respondWith(handleRequest(event.request))
+})
 
 async function handleRequest(request) {
-  try {
-    const url = new URL(request.url);
+  const url = new URL(request.url)
+  let path = url.pathname
 
-    // Ha a főoldalra mennénk, a "Videósok.html"-t adjuk vissza
-    if (url.pathname === '/' || url.pathname === '/index.html') {
-      return await fetchAsset('direct/Videósok.html');
-    }
-
-    // Minden más fájlt a direct/ mappából szolgálunk ki
-    return await fetchAsset(`direct${url.pathname}`);
-  } catch (err) {
-    return new Response('Hiba: a fájl nem található.', { status: 404 });
+  // Ha a főoldalra mennénk, a "Videósok.html"-t adjuk vissza
+  if (path === "/" || path === "/index.html") {
+    path = "/Videósok.html"
   }
-}
 
-async function fetchAsset(path) {
-  const assetUrl = new URL(path, 'https://vide-sg-la-1.marosvarilevente09.workers.dev/');
-  const response = await fetch(assetUrl);
-  return response;
+  // Minden más fájl a direct/ mappából
+  path = `/direct${path}`
+
+  try {
+    const response = await fetch(new URL(path, "https://vide-sg-la-1.marosvarilevente09.workers.dev/"))
+    if (!response.ok) throw new Error("Fájl nem található")
+    return response
+  } catch (err) {
+    return new Response("404 - Fájl nem található.", { status: 404 })
+  }
 }
