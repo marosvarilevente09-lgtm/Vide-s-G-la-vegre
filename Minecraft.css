@@ -7,7 +7,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* cím középre */
+  align-items: center;
 }
 
 /* --- Fő cím --- */
@@ -30,8 +30,8 @@ h1 {
 
 /* Gradiens animáció */
 @keyframes gradientMove {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 0%; }
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 0%; }
   100% { background-position: 0% 0%; }
 }
 
@@ -62,24 +62,26 @@ img {
   box-sizing: border-box;
 }
 
-/* --- Kis kategóriák rácsban --- */
+/* --- Kis kategóriák rácsban (auto-width responsive) --- */
 .subcategories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 600px);
-  justify-content: center;
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  justify-items: center;
   padding: 10px 0;
   box-sizing: border-box;
 }
 
 .subcategory {
   background-color: #222;
-  padding: 30px;
+  padding: 20px;
   border-radius: 12px;
   border: 1px solid #555;
   display: flex;
   flex-direction: column;
-  width: 600px; /* fix szélesség desktopon */
+  width: 100%; /* teljes grid cellán belül */
+  max-width: 400px; /* opcionális: ne legyen túl széles */
   box-sizing: border-box;
 }
 
@@ -89,18 +91,25 @@ img {
   font-size: 1.5em;
 }
 
+/* --- Buborékok, válaszok --- */
 .subcategory label {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 15px 20px;
+  justify-content: center;
+  padding: 12px 10px;
   margin: 8px 0;
   cursor: pointer;
-  font-size: 1.3em;
+  font-size: 1.2em;
   background-color: #333;
   border-radius: 8px;
   transition: background 0.2s;
   user-select: none;
+  width: 100%; /* teljes szélesség */
+  box-sizing: border-box;
+}
+
+.subcategory input[type="radio"] {
+  display: none;
 }
 
 label.selected {
@@ -108,19 +117,9 @@ label.selected {
   background: linear-gradient(270deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
   background-size: 600% 100%;
   animation: gradientMove 5s linear infinite;
-  transition: color 0.3s;
 }
 
-.subcategory input[type="radio"] {
-  display: none;
-}
-
-input[type="radio"] {
-  margin-right: 12px;
-  width: 20px;
-  height: 20px;
-}
-
+/* --- Gombok --- */
 .next-button-container {
   text-align: center;
   margin: 40px 0;
@@ -137,6 +136,10 @@ input[type="radio"] {
   background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff);
   background-size: 200%;
   transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%; /* full-width mobiles */
+  max-width: 400px;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .vote-button.disabled {
@@ -144,69 +147,38 @@ input[type="radio"] {
   opacity: 0.5;
 }
 
-/* === Mobil reszponzivitás 480px alatt === */
+/* --- Input mezők --- */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* === Reszponzív mobil (480px alatt) === */
 @media (max-width: 480px) {
-
-  .container {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
   .title {
     font-size: 28px;
     text-align: center;
   }
 
-  input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-
-  .subcategories-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 0;
-    align-items: center;
-  }
-
-  .subcategory {
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
-    box-sizing: border-box;
-  }
-
-  .subcategory label {
-    width: 100%;
-    justify-content: center;
-    font-size: 1em;
-    padding: 12px 10px;
-    box-sizing: border-box;
-  }
-
-  label.selected {
-    font-size: 1em;
-  }
-
-  .vote-button {
-    width: 100%;
-    padding: 14px 0;
-    font-size: 1.2em;
-    text-align: center;
-  }
-
   .divider {
     width: 90%;
-    height: 2px;
     margin: 20px auto 30px;
   }
 
-}
-  opacity: 0.5;
+  .subcategory {
+    padding: 15px;
+    max-width: 100%;
+  }
 
-}
+  .subcategory label {
+    font-size: 1em;
+    padding: 10px;
+  }
 
+  .vote-button {
+    font-size: 1.2em;
+    padding: 14px 0;
+  }
+}
