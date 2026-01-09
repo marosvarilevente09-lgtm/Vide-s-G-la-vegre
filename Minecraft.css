@@ -18,15 +18,7 @@ body {
   font-size: 52px;
   font-weight: bold;
   text-align: center;
-  margin: 20px 0;
-
-  background: linear-gradient(
-    90deg,
-    #d4af37,
-    #b97cff,
-    #4aa3ff,
-    #d4af37
-  );
+  background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
   background-size: 300%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -38,128 +30,107 @@ body {
   100% { background-position: 300%; }
 }
 
+/* ===== ELVÁLASZTÓ ===== */
 .divider {
   width: 60%;
   height: 2px;
-  margin: 25px auto 40px;
+  margin: 25px auto 50px;
   background: linear-gradient(to right, transparent, white, transparent);
 }
 
-/* ===== KATEGÓRIA ===== */
+/* ===== FŐ KATEGÓRIA ===== */
 .category {
-  width: 95%;
+  width: 100%;
   max-width: 1200px;
-  margin: 20px 0;
   padding: 20px;
-  border-radius: 10px;
   background-color: #111;
   border: 1px solid #555;
+  border-radius: 10px;
 }
 
 /* ===== RÁCS ===== */
 .subcategories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
 }
 
-/* ===== ALKATEGÓRIA ===== */
+/* ===== DOBOZ ===== */
 .subcategory {
   background-color: #222;
-  padding: 25px;
+  padding: 20px;
   border-radius: 12px;
   border: 1px solid #555;
   width: 100%;
 }
 
+/* ===== ALCÍM ===== */
 .subcategory strong {
   display: block;
-  margin-bottom: 20px;
-  font-size: 1.4em;
+  margin-bottom: 15px;
+  font-size: 1.3em;
 }
 
-/* ===== VÁLASZTÓ BUBORÉK ===== */
+/* ===== BUBORÉKOK ===== */
 .subcategory label {
   display: block;
   width: 100%;
-  padding: 14px 18px;
-  margin: 10px 0;
-  font-size: 1.2em;
+  padding: 14px;
+  margin: 8px 0;
+  font-size: 1.1em;
   text-align: center;
   background-color: #333;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.subcategory label:hover {
-  transform: scale(1.02);
 }
 
 /* kiválasztva */
 label.selected {
   color: white;
   background: linear-gradient(270deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
-  background-size: 600% 100%;
+  background-size: 600%;
   animation: gradientMove 5s linear infinite;
 }
 
-/* rádiógomb elrejtése */
-.subcategory input[type="radio"] {
+/* rádió eltüntetése */
+input[type="radio"] {
   display: none;
 }
 
 /* ===== GOMB ===== */
-.next-button-container {
-  width: 100%;
-  text-align: center;
-  margin: 40px 0;
-}
-
 .vote-button {
-  display: inline-block;
-  padding: 16px 50px;
-  font-size: 1.3em;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 16px;
+  font-size: 1.2em;
   font-weight: bold;
+  text-align: center;
   color: white;
   text-decoration: none;
   border-radius: 30px;
   background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff);
-  background-size: 200%;
 }
 
-/* ================================================= */
-/* ================= MOBIL ========================= */
-/* ================================================= */
-
-@media (max-width: 768px) {
-
+/* ===== MOBIL FINOMHANGOLÁS ===== */
+@media (max-width: 600px) {
   .title {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .divider {
     width: 90%;
   }
 
-  .subcategories-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .subcategory {
-    padding: 18px;
+  .subcategory strong {
+    font-size: 1.1em;
   }
 
   .subcategory label {
     font-size: 1em;
-    padding: 14px;
-  }
-
-  .vote-button {
-    width: 100%;
-    padding: 14px 0;
-    font-size: 1.2em;
+    padding: 12px;
   }
 }
