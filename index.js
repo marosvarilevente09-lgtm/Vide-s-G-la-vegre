@@ -1,26 +1,21 @@
 import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
 
 addEventListener('fetch', event => {
-  event.respondWith(handleEvent(event));
+  event.respondWith(handleRequest(event));
 });
 
-async function handleEvent(event) {
+async function handleRequest(event) {
   try {
-    const options = {
-      mapRequestToAsset: req => {
-        let pathname = new URL(req.url).pathname;
-        if (pathname === "/") pathname = "/index.html"; // kezdőlap
-        return new Request(pathname, req);
-      }
-    };
+    const url = new URL(event.request.url);
+    const path = url.pathname === '/' ? '/index.html' : url.pathname;
+
     return await getAssetFromKV(event, {
-  mapRequestToAsset: req => new Request(path, req),
-  cacheControl: {
-    bypassCache: true // mindig frissíti az assetet
-  }
-});
+      mapRequestToAsset: req => new Request(path, req),
+      cacheControl: {
+        bypassCache: true  // mindig a friss fájlt hozza
+      }
+    });
   } catch (err) {
     return new Response('File not found', { status: 404 });
   }
 }
-
