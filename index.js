@@ -4,10 +4,11 @@ addEventListener("fetch", event => {
 
 async function handleRequest(event) {
   const url = new URL(event.request.url);
-  let path = url.pathname === "/" ? "/index.html" : url.pathname; // kezdőlap beállítása
+  // "/" esetén index.html
+  let path = url.pathname === "/" ? "/index.html" : url.pathname;
 
   try {
-    return await fetch(new Request(`./direct${path}`, event.request));
+    return await fetch(new Request(path, event.request));
   } catch (err) {
     return new Response("File not found", { status: 404 });
   }
