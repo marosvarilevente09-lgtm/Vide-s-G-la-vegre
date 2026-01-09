@@ -1,3 +1,29 @@
+/* Alap container beállítások */
+body {
+    margin: 0;
+    font-family: "Times New Roman", serif;
+    background-color: #000;
+    color: #fff;
+}
+
+.container {
+    max-width: 600px; /* ne legyen túl széles */
+    margin: 0 auto;   /* középre */
+    padding: 20px;
+}
+
+/* Cím */
+.title {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form csoportok */
+.form-group {
+    margin-bottom: 15px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -134,5 +160,6 @@ input[type="radio"] {
     padding: 12px;
   }
 }
+
 
 
