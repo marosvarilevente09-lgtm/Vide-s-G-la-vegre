@@ -13,8 +13,14 @@ async function handleEvent(event) {
         return new Request(pathname, req);
       }
     };
-    return await getAssetFromKV(event, options);
+    return await getAssetFromKV(event, {
+  mapRequestToAsset: req => new Request(path, req),
+  cacheControl: {
+    bypassCache: true // mindig frissíti az assetet
+  }
+});
   } catch (err) {
     return new Response('File not found', { status: 404 });
   }
 }
+
