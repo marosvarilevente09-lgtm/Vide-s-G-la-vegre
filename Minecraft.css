@@ -175,7 +175,66 @@ input[type="radio"] {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
+/* === Mobil reszponzivitás 480px alatt === */
+@media (max-width: 480px) {
+  
+  /* Konténer legyen teljes szélességű és középre igazítva */
+  .container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Fő cím kisebb legyen */
+  .title {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  /* Form mezők és szövegek teljes szélességűek */
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  /* Kis kategóriák, buborékok rugalmasan a teljes szélességre */
+  .subcategory {
+    width: 100%;       /* fix 600px helyett teljes szélesség */
+    padding: 15px;
+  }
+
+  .subcategory label {
+    width: 100%;       /* buborékok teljes szélességűek */
+    justify-content: flex-start; /* szöveg balra */
+    font-size: 1em;
+    padding: 12px 15px;
+  }
+
+  /* Buborék kiválasztáskor animáció marad, de kisebb buborék */
+  label.selected {
+    font-size: 1em;
+  }
+
+  /* Gombok legyenek teljes szélességűek */
+  .vote-button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  /* Elválasztó vonal kisebb legyen */
+  .divider {
+    width: 90%;
+    height: 2px;
+    margin: 20px auto 30px;
+  }
+}
+
 .vote-button.disabled {
   pointer-events: none;
   opacity: 0.5;
+
 }
