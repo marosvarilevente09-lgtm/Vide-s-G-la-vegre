@@ -1,6 +1,9 @@
-/* === Alap stílusok === */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #000; /* fekete háttér */
+  background-color: #000;
   color: #fff;
   font-family: Arial, sans-serif;
   margin: 0;
@@ -10,108 +13,91 @@ body {
   align-items: center;
 }
 
-/* --- Fő cím --- */
-h1 {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 3em;
-}
-
-/* Színváltós cím */
+/* ===== CÍM ===== */
 .title {
   font-size: 52px;
   font-weight: bold;
-  background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
+  text-align: center;
+  margin: 20px 0;
+
+  background: linear-gradient(
+    90deg,
+    #d4af37,
+    #b97cff,
+    #4aa3ff,
+    #d4af37
+  );
   background-size: 300%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientMove 6s linear infinite;
 }
 
-/* Gradiens animáció */
 @keyframes gradientMove {
-  0%   { background-position: 0% 0%; }
-  50%  { background-position: 100% 0%; }
-  100% { background-position: 0% 0%; }
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
 }
 
-/* Elválasztó vonal */
 .divider {
   width: 60%;
   height: 2px;
-  margin: 25px auto 50px;
+  margin: 25px auto 40px;
   background: linear-gradient(to right, transparent, white, transparent);
 }
 
-/* --- Kép stílus --- */
-img {
-  width: 300px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-/* --- Nagy kategória doboz --- */
+/* ===== KATEGÓRIA ===== */
 .category {
-  width: 90%;
+  width: 95%;
   max-width: 1200px;
   margin: 20px 0;
   padding: 20px;
   border-radius: 10px;
   background-color: #111;
   border: 1px solid #555;
-  box-sizing: border-box;
 }
 
-/* --- Kis kategóriák rácsban (auto-width responsive) --- */
+/* ===== RÁCS ===== */
 .subcategories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  width: 100%;
-  justify-items: center;
-  padding: 10px 0;
-  box-sizing: border-box;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
 }
 
+/* ===== ALKATEGÓRIA ===== */
 .subcategory {
   background-color: #222;
-  padding: 20px;
+  padding: 25px;
   border-radius: 12px;
   border: 1px solid #555;
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* teljes grid cellán belül */
-  max-width: 400px; /* opcionális: ne legyen túl széles */
-  box-sizing: border-box;
+  width: 100%;
 }
 
 .subcategory strong {
   display: block;
   margin-bottom: 20px;
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 
-/* --- Buborékok, válaszok --- */
+/* ===== VÁLASZTÓ BUBORÉK ===== */
 .subcategory label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 10px;
-  margin: 8px 0;
-  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 14px 18px;
+  margin: 10px 0;
   font-size: 1.2em;
+  text-align: center;
   background-color: #333;
-  border-radius: 8px;
-  transition: background 0.2s;
+  border-radius: 10px;
+  cursor: pointer;
   user-select: none;
-  width: 100%; /* teljes szélesség */
-  box-sizing: border-box;
+  transition: transform 0.2s, background 0.2s;
 }
 
-.subcategory input[type="radio"] {
-  display: none;
+.subcategory label:hover {
+  transform: scale(1.02);
 }
 
+/* kiválasztva */
 label.selected {
   color: white;
   background: linear-gradient(270deg, #d4af37, #b97cff, #4aa3ff, #d4af37);
@@ -119,8 +105,14 @@ label.selected {
   animation: gradientMove 5s linear infinite;
 }
 
-/* --- Gombok --- */
+/* rádiógomb elrejtése */
+.subcategory input[type="radio"] {
+  display: none;
+}
+
+/* ===== GOMB ===== */
 .next-button-container {
+  width: 100%;
   text-align: center;
   margin: 40px 0;
 }
@@ -130,55 +122,44 @@ label.selected {
   padding: 16px 50px;
   font-size: 1.3em;
   font-weight: bold;
-  text-decoration: none;
   color: white;
+  text-decoration: none;
   border-radius: 30px;
   background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff);
   background-size: 200%;
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 100%; /* full-width mobiles */
-  max-width: 400px;
-  text-align: center;
-  box-sizing: border-box;
 }
 
-.vote-button.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
+/* ================================================= */
+/* ================= MOBIL ========================= */
+/* ================================================= */
 
-/* --- Input mezők --- */
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
+@media (max-width: 768px) {
 
-/* === Reszponzív mobil (480px alatt) === */
-@media (max-width: 480px) {
   .title {
-    font-size: 28px;
-    text-align: center;
+    font-size: 32px;
   }
 
   .divider {
     width: 90%;
-    margin: 20px auto 30px;
+  }
+
+  .subcategories-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .subcategory {
-    padding: 15px;
-    max-width: 100%;
+    padding: 18px;
   }
 
   .subcategory label {
     font-size: 1em;
-    padding: 10px;
+    padding: 14px;
   }
 
   .vote-button {
-    font-size: 1.2em;
+    width: 100%;
     padding: 14px 0;
+    font-size: 1.2em;
   }
 }
