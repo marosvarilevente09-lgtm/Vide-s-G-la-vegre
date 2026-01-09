@@ -12,7 +12,7 @@ async function handleRequest(event) {
     return await getAssetFromKV(event, {
       mapRequestToAsset: req => new Request(path, req),
       cacheControl: {
-        bypassCache: true  // mindig a friss fájlt hozza
+        bypassCache: true  // Ezzel mindig a friss fájlt adja
       }
     });
   } catch (err) {
