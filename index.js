@@ -6,7 +6,11 @@ addEventListener('fetch', event => {
 
 async function handleRequest(event) {
   try {
-    return await getAssetFromKV(event);
+    const url = new URL(event.request.url);
+    const path = url.pathname === '/' ? '/Szavazs 2026.html' : url.pathname;
+    return await getAssetFromKV(event, {
+      mapRequestToAsset: req => new Request(path, req)
+    });
   } catch (err) {
     return new Response('File not found', { status: 404 });
   }
