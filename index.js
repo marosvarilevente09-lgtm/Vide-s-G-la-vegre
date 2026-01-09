@@ -6,11 +6,7 @@ addEventListener('fetch', event => {
 
 async function handleRequest(event) {
   try {
-    const request = event.request;
-    // Ez biztosan a ./direct/index.html-t fogja betölteni
-    return await getAssetFromKV(event, {
-      mapRequestToAsset: req => new Request("/index.html", req)
-    });
+    return await getAssetFromKV(event);
   } catch (err) {
     return new Response('File not found', { status: 404 });
   }
