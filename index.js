@@ -1,21 +1,14 @@
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+import fetch from 'node-fetch';
 
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event));
+const zoneId = 'A_TE_ZONE_ID';
+const apiToken = 'A_TE_API_TOKEN';
+
+await fetch(`https://api.cloudflare.com/client/v4/zones/${zoneId}/purge_cache`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${apiToken}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ purge_everything: true })
 });
-
-async function handleRequest(event) {
-  try {
-    const url = new URL(event.request.url);
-    const path = url.pathname === '/' ? '/index.html' : url.pathname;
-
-    return await getAssetFromKV(event, {
-      mapRequestToAsset: req => new Request(path, req),
-      cacheControl: {
-        bypassCache: true // Mindig a friss CSS-t adja
-      }
-    });
-  } catch (err) {
-    return new Response('File not found', { status: 404 });
-  }
-}
+console.log('Cache cleared!');
