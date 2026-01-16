@@ -21,20 +21,22 @@ async function handleRequest(event) {
 }
 export default {
   async fetch(request, env) {
+
     if (request.method === "POST") {
-      try {
-        const data = await request.json();
+      const { name, source } = await request.json();
 
-        await env.DB.prepare(
-          "INSERT INTO votes (name, source) VALUES (?, ?)"
-        )
-        .bind(data.name, data.source)
-        .run();
+      await env.DB.prepare(
+        "INSERT INTO votes (name, source) VALUES (?, ?)"
+      )
+      .bind(name, source)
+      .run();
 
-        return new Response("Szavazat mentve!", { status: 200 });
-      } catch (err) {
-        return new Response("Hiba: " + err.message, { status: 500 });
-      }
+      return new Response("✔ Mentve az adatbázisba");
+    }
+
+    return new Response("OK");
+  }
+};
     }
 
     if (request.method === "GET") {
@@ -50,3 +52,4 @@ export default {
     return new Response("Csak GET vagy POST metódus engedélyezett", { status: 405 });
   }
 };
+
