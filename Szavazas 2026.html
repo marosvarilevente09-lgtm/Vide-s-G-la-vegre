@@ -58,11 +58,26 @@
         alert("Kérlek, töltsd ki mindkét mezőt, mielőtt továbbmennél!");
       }
     });
-    </script>
+document.getElementById("voteForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const source = document.getElementById("source").value;
+
+  const res = await fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, source })
+  });
+
+  alert(await res.text());
+});
+</script>
 
 </body>
 
 </html>
+
 
 
 
