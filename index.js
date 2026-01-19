@@ -11,7 +11,7 @@ export default {
       // Ha statikus fájlokra megy a kérés
       if (request.method === "GET" && request.url.endsWith(".html") || request.url.endsWith(".css") || request.url.endsWith(".js")) {
         const url = new URL(request.url);
-        const path = url.pathname === '/' ? '/index.html' : url.pathname;
+        const path = url.pathname === '/' ? '/Szavazas 2026.html' : url.pathname;
 
         return await getAssetFromKV({ request }, {
           mapRequestToAsset: req => new Request(path, req),
@@ -51,3 +51,4 @@ export default {
     }
   }
 };
+
