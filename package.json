@@ -1,0 +1,24 @@
+{
+  "name": "videos-gala-2026-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marosvarilevente09-lgtm/Vide-s-G-la-vegre.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/marosvarilevente09-lgtm/Vide-s-G-la-vegre/issues"
+  },
+  "homepage": "https://github.com/marosvarilevente09-lgtm/Vide-s-G-la-vegre#readme",
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.4.1"
+  }
+}
