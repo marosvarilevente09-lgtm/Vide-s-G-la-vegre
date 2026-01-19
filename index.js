@@ -46,10 +46,9 @@ export default {
       return new Response(JSON.stringify(results), {
         headers: { "Content-Type": "application/json" }
       });
-    }
-
     return new Response("Csak GET vagy POST metódus engedélyezett", { status: 405 });
   }
 };
+
 
 
