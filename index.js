@@ -46,11 +46,16 @@ export default {
         "SELECT * FROM votes ORDER BY created_at DESC"
       ).all();
 
-      return new Response(JSON.stringify(results), {
-        headers: { "Content-Type": "application/json" }
-      });
+      return new Response(JSON.stringify(eredmények), {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+};
     return new Response("Csak GET vagy POST metódus engedélyezett", { status: 405 });
   };
+
 
 
 
