@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026-os Videós és VTuber Gála</title>
+    
+    <!-- Fő stíluslapok -->
     <link rel="stylesheet" href="Szavazas-2026.css">
+    <link rel="stylesheet" href="Videók.css">
+    <link rel="stylesheet" href="VTuberek.css">
 </head>
-
 <body>
 
     <div class="container">
@@ -15,72 +18,78 @@
 
         <div class="divider"></div>
 
-        <div class="form-group">
-            <label for="name">Neved:</label><br>
-            <input type="text" id="name" placeholder="Írd be a neved">
-        </div>
+        <!-- Szavazás előtti űrlap -->
+        <form id="voteForm">
+            <div class="form-group">
+                <label for="name">Neved:</label><br>
+                <input type="text" id="name" placeholder="Írd be a neved" required>
+            </div>
 
-        <div class="form-group">
-            <label for="source">Honnét hallottál rólunk?</label><br>
-            <input type="text" id="source" placeholder="Pl.: YouTube, barát, Discord">
-        </div>
+            <div class="form-group">
+                <label for="source">Honnét hallottál rólunk?</label><br>
+                <input type="text" id="source" placeholder="Pl.: YouTube, barát, Discord" required>
+            </div>
 
-        <div class="next-button-container">
-            <a href="Videósok.html" id="startLink" class="vote-button disabled">
-                Tovább a szavazásokhoz
-            </a>
-        </div>
+            <div class="next-button-container">
+                <button type="submit" id="startLink" class="vote-button disabled" disabled>
+                    Tovább a szavazásokhoz
+                </button>
+            </div>
+        </form>
 
     </div>
 
     <script>
     const nameInput = document.getElementById("name");
     const sourceInput = document.getElementById("source");
-    const startLink = document.getElementById("startLink");
+    const startButton = document.getElementById("startLink");
+    const voteForm = document.getElementById("voteForm");
 
+    // Ellenőrzi, hogy ki van-e töltve mindkét mező
     function checkStartForm() {
-      const nameFilled = nameInput.value.trim() !== "";
-      const sourceFilled = sourceInput.value.trim() !== "";
+        const nameFilled = nameInput.value.trim() !== "";
+        const sourceFilled = sourceInput.value.trim() !== "";
 
-      if (nameFilled && sourceFilled) {
-        startLink.classList.remove("disabled");
-      } else {
-        startLink.classList.add("disabled");
-      }
+        if (nameFilled && sourceFilled) {
+            startButton.classList.remove("disabled");
+            startButton.disabled = false;
+        } else {
+            startButton.classList.add("disabled");
+            startButton.disabled = true;
+        }
     }
 
     nameInput.addEventListener("input", checkStartForm);
     sourceInput.addEventListener("input", checkStartForm);
 
-    startLink.addEventListener("click", function(e) {
-      if (!nameInput.value.trim() || !sourceInput.value.trim()) {
+    // Űrlap elküldése a Worker-nek
+    voteForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        alert("Kérlek, töltsd ki mindkét mezőt, mielőtt továbbmennél!");
-      }
+
+        const name = nameInput.value.trim();
+        const source = sourceInput.value.trim();
+
+        if (!name || !source) {
+            alert("Kérlek, töltsd ki mindkét mezőt!");
+            return;
+        }
+
+        try {
+            const res = await fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, source })
+            });
+
+            const text = await res.text();
+            alert(text);
+            voteForm.reset();
+            checkStartForm();
+        } catch (err) {
+            alert("Hiba történt az adatküldés során: " + err.message);
+        }
     });
-document.getElementById("voteForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const source = document.getElementById("source").value;
-
-  const res = await fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, source })
-  };
-
-  alert(await res.text());
-});
-</script>
+    </script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
