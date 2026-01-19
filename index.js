@@ -37,7 +37,6 @@ export default {
     return new Response("OK");
   }
 };
-    }
 
     if (request.method === "GET") {
       const { results } = await env.DB.prepare(
@@ -52,4 +51,5 @@ export default {
     return new Response("Csak GET vagy POST metódus engedélyezett", { status: 405 });
   }
 };
+
 
