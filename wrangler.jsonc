@@ -4,14 +4,5 @@
   "main": "index.js",
 
   "assets": {
-    "directory": "./direct"
+    "directory": "./"
   },
-
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "magyarorszag-keszthely",
-      "database_id": "e182a915-2c3b-4b84-b2b2-e4573162333c"
-    }
-  ]
-}
