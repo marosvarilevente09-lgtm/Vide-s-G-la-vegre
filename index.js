@@ -20,7 +20,10 @@ async function handleRequest(event) {
   }
 }
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
+    const eredmények = {
+      success: true
+    };
 
     if (request.method === "POST") {
       const { name, source } = await request.json();
@@ -48,6 +51,7 @@ export default {
       });
     return new Response("Csak GET vagy POST metódus engedélyezett", { status: 405 });
   };
+
 
 
 
