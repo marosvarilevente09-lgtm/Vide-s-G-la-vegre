@@ -22,7 +22,8 @@ async function handleRequest(event) {
 export default {
   async fetch(request, env, ctx) {
     const eredmények = {
-      success: true
+      status: "ok",
+      time: new Date().toISOString()
     };
 
     if (request.method === "POST") {
@@ -55,6 +56,7 @@ export default {
 };
     return new Response("Csak GET vagy POST metódus engedélyezett", { status: 405 });
   };
+
 
 
 
