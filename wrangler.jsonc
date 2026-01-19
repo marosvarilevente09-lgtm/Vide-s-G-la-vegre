@@ -4,5 +4,8 @@
   "main": "index.js",
   "assets": {
     "directory": "./"
+  },
+  "build": {
+    "command": "npm install"
   }
 }
