@@ -1,77 +1,165 @@
-/* Alap container beállítások */
 body {
     margin: 0;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: "Times New Roman", serif;
-    background-color: #000;
-    color: #fff;
+    color: white;
 }
 
 .container {
-    max-width: 600px; /* ne legyen túl széles */
-    margin: 0 auto;   /* középre */
-    padding: 20px;
-}
-
-/* Cím */
-.title {
-    font-size: 2em;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Form csoportok */
-.form-group {
-    margin-bottom: 15px;
-}
-
-input[type="text"] {
-    width: 100%; /* kitölti a container szélességét */
-    padding: 10px;
-    font-size: 1em;
-    box-sizing: border-box; /* padding miatt ne legyen túl nagy */
-}
-
-/* Szavazás gomb */
-.vote-button {
-    display: block;
     width: 100%;
+}
+
+/* Színváltós cím */
+.title {
+    font-size: 52px;
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #d4af37,
+        #b97cff,
+        #4aa3ff,
+        #d4af37
+    );
+
+    background-size: 300%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientMove 6s linear infinite;
+}
+
+/* Gradiens animáció */
+@keyframes gradientMove {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 300%;
+    }
+}
+
+/* Elválasztó vonal */
+.divider {
+    width: 60%;
+    height: 2px;
+    margin: 25px auto 50px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        white,
+        transparent
+    );
+}
+
+.form-group {
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+input {
+    width: 300px;
+    height: 35px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 18px;
     text-align: center;
-    padding: 10px;
-    background-color: #1e90ff;
-    color: #fff;
+    outline: none;
+}
+
+.start-screen {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: center;
+  display: block;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    font-family: "Times New Roman", serif;
+    color: white;
+}
+
+.next-button-container {
+  text-align: center;      /* középre */
+  margin: 40px 0;          /* egy kis tér az utolsó doboz alatt */
+}
+
+.vote-button {
+    position: fixed;         /* fix pozíció a képernyőn */
+    bottom: 30px;            /* 30px-re a képernyő aljától */
+    left: 50%;               /* vízszintesen középre */
+    transform: translateX(-50%); /* középre igazítás */
+    
+    display: inline-block;
+    padding: 14px 40px;
+    font-size: 20px;
+    font-weight: bold;
     text-decoration: none;
-    border-radius: 5px;
+    color: white;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #d4af37, #b97cff, #4aa3ff);
+    background-size: 200%;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
 }
 
 .vote-button.disabled {
-    background-color: gray;
-    pointer-events: none;
+    background-color: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-/* Vízszintes elválasztó */
-.divider {
-    height: 2px;
-    background-color: #fff;
-    margin: 20px 0;
+#countdown span {
+  margin: 0 10px;
 }
 
-/* Media query mobilra */
-@media (max-width: 480px) {
-    .container {
-        padding: 15px;
-    }
-    .title {
-        font-size: 1.5em;
-    }
-    input[type="text"] {
-        font-size: 0.9em;
-    }
-    .vote-button {
-        font-size: 1em;
-        padding: 12px;
-    }
+#countdown {
+  font-size: 36px;
+  font-weight: bold;
+  background-color: #333;
+  padding: 15px 30px;
+  border-radius: 10px;
+  position: fixed; /* FIXALÁS a képernyő tetejére */
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* mindig felül legyen */
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
+/* Törés a tartalomnak a számláló alatt */
+body > h1,
+body > .divider,
+body > .form-group,
+body > .next-button-container {
+  margin-top: 100px; /* vagy akkora, mint a számláló + padding */
+}
